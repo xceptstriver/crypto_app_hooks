@@ -43,13 +43,7 @@ function* fetchMarkets({payload: {params}}) {
       return formattedData;
     };
 
-    console.log('priceData', SAMPLE_DATA[0].sparkline_in_7d.price[0]);
-
     const formattedResponse = formatMarketData(data);
-    console.log(
-      'formattedPricedata',
-      formattedResponse[0].sparkline_in_7d.price[0],
-    );
     if (error) {
       yield put(failedFetchMarket(params, error));
     } else {

@@ -36,14 +36,12 @@ const MarketScreen = props => {
   const snapPoints = useMemo(() => ['50%'], []);
   const [selectedCoinData, setSelectedCoinData] = useState(null);
   const [loader, setLoader] = useState(true);
+  const maxPage = 2;
+  const pageNo = 1;
 
   useEffect(() => {
-    fetchMaketData(1);
+    fetchMaketData(pageNo);
   }, []);
-
-  useEffect(() => {
-    console.log('coinsstatus', coins_status);
-  }, [coins_status]);
 
   // useEffect(() => {
 
@@ -116,13 +114,28 @@ const MarketScreen = props => {
     );
   };
 
+  const endReachedFetchListing = () => {
+    if (
+      coins_status == STATE_STATUS.FETCHED &&
+      coins_status != STATE_STATUS.FETCHING &&
+      pageNo + 1 < maxPage &&
+      !loader
+    ) {
+      fetchMaketData(pageNo + 1);
+    }
+  };
+
   const renderList = () => {
     return (
       <FlatList
         data={coinsData || []}
-        keyExtractor={item => `${item.id}-${item.symbol}`}
+        keyExtractor={item =>
+          `${item.id}-${item.symbol}-${item.ath}-${item.circulating_supply}`
+        }
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.5}
+        onEndReached={endReachedFetchListing}
       />
     );
   };

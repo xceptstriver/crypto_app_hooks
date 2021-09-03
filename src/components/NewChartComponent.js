@@ -50,10 +50,6 @@ const NewChartComponent = props => {
     return '';
   };
 
-  useEffect(() => {
-    console.log('propsData', props.sparkline);
-  }, []);
-
   return (
     <ChartPathProvider
       data={{
