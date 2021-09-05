@@ -1,15 +1,9 @@
-import HomeScreen from '../containers/Home';
 import SearchScreen from '../containers/Search';
 import MarketScreen from '../containers/Market';
 import PortfolioScreen from '../containers/Portfolio';
+import ExchangeScreen from '../containers/Exchange';
 
 export const BOTTOM_TAB_SCREENS = [
-  // {
-  //   name: 'Home',
-  //   component: HomeScreen,
-  //   activeIcon: 'home',
-  //   inactiveIcon: 'home-outline',
-  // },
   {
     name: 'Market',
     component: MarketScreen,
@@ -22,6 +16,12 @@ export const BOTTOM_TAB_SCREENS = [
     activeIcon: 'search',
     inactiveIcon: 'search-outline',
   },
+  {
+    name: 'Exchange',
+    component: ExchangeScreen,
+    activeIcon: 'podium',
+    inactiveIcon: 'podium-outline',
+  },
 
   {
     name: 'Portfolio',
@@ -32,10 +32,6 @@ export const BOTTOM_TAB_SCREENS = [
 ];
 
 export const APP_STACK_SCREENS = [
-  // {
-  //   name: 'Home',
-  //   component: HomeScreen,
-  // },
   {
     name: 'Market',
     component: MarketScreen,
@@ -43,6 +39,10 @@ export const APP_STACK_SCREENS = [
   {
     name: 'Search',
     component: SearchScreen,
+  },
+  {
+    name: 'Exchange',
+    component: ExchangeScreen,
   },
 
   {
