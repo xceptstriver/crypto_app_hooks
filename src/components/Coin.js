@@ -80,10 +80,11 @@ const Coin = props => {
           }}>
           <Text style={{color: '#fff', fontSize: 12}}>
             $
-            {props.item.current_price
-              ?.toFixed(2)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            {props.item.current_price &&
+              props.item.current_price
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </Text>
           <View
             style={{

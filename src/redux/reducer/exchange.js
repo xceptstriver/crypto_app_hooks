@@ -1,22 +1,22 @@
 import {STATE_STATUS} from '../constants';
-import {MARKET_ACTIONS} from '../constants/market';
+import {EXCHANGE_ACTIONS} from '../constants/exchange';
 
 const initialState = {
   status: STATE_STATUS.UNFETCHED,
-  coins: [],
+  exchanges: [],
   maxPage: 50,
   pageIndex: 1,
 };
 
-export const marketReducer = (state = initialState, action) => {
+export const exchangeReducer = (state = initialState, action) => {
   const {type, payload, error} = action;
   switch (type) {
-    case MARKET_ACTIONS.FETCH_MARKET:
+    case EXCHANGE_ACTIONS.FETCH_EXCHANGE:
       if (payload.params.page === 1) {
         return {
           ...state,
           status: STATE_STATUS.FETCHING,
-          coins: [],
+          exchanges: [],
           params: payload.params,
         };
       }
@@ -25,23 +25,25 @@ export const marketReducer = (state = initialState, action) => {
         status: STATE_STATUS.FETCHING,
         params: payload.params,
       };
-    case MARKET_ACTIONS.FETCHED_MARKET:
+
+    case EXCHANGE_ACTIONS.FETCHED_EXCHANGE:
       if (payload.params.page === 1) {
         return {
           ...state,
           status: STATE_STATUS.FETCHED,
-          coins: payload.coins,
+          exchanges: payload.exchanges,
           pageIndex: payload.params.page + 1,
         };
       }
+
       return {
         ...state,
         status: STATE_STATUS.FETCHED,
-        coins: [...state.coins, ...payload.coins],
+        exchanges: [...state.exchanges, ...payload.exchanges],
         pageIndex: payload.params.page + 1,
       };
 
-    case MARKET_ACTIONS.FAILED_FETCH_MARKET:
+    case EXCHANGE_ACTIONS.FAILED_FETCH_EXCHANGE:
       return {
         ...state,
         status: STATE_STATUS.FETCHED,

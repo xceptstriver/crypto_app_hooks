@@ -27,6 +27,9 @@ const MarketScreen = props => {
     state => (state.marketReducer || {}).status || STATE_STATUS.UNFETCHED,
   );
 
+  const maxPage = useSelector(state => state.marketReducer || {}).maxPage;
+  const pageNo = useSelector(state => state.marketReducer || {}).pageIndex || 1;
+
   const dispatch = useDispatch();
 
   // ref
@@ -36,8 +39,8 @@ const MarketScreen = props => {
   const snapPoints = useMemo(() => ['50%'], []);
   const [selectedCoinData, setSelectedCoinData] = useState(null);
   const [loader, setLoader] = useState(true);
-  const maxPage = 2;
-  const pageNo = 1;
+  // const maxPage = 50;
+  // const pageNo = 1;
 
   useEffect(() => {
     fetchMaketData(pageNo);
@@ -118,10 +121,10 @@ const MarketScreen = props => {
     if (
       coins_status == STATE_STATUS.FETCHED &&
       coins_status != STATE_STATUS.FETCHING &&
-      pageNo + 1 < maxPage &&
+      pageNo < maxPage &&
       !loader
     ) {
-      fetchMaketData(pageNo + 1);
+      fetchMaketData(pageNo);
     }
   };
 
@@ -129,8 +132,8 @@ const MarketScreen = props => {
     return (
       <FlatList
         data={coinsData || []}
-        keyExtractor={item =>
-          `${item.id}-${item.symbol}-${item.ath}-${item.circulating_supply}`
+        keyExtractor={(item, index) =>
+          `${item.id}-${item.symbol}-${item.ath}-${item.circulating_supply}-${index}`
         }
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
@@ -141,27 +144,31 @@ const MarketScreen = props => {
   };
 
   const renderLoader = () => (
-    <ActivityIndicator
-      size={'large'}
-      color={'#6930C3'}
+    <View
       style={{
-        activityIndicator: {
-          backgroundColor: '#e7e7e7',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        marginTop: 150,
+      }}>
+      <ActivityIndicator
+        size={'large'}
+        color={bkgStyle.titleColor}
+        style={{
           borderRadius: 8,
           width: '100%',
-          marginHorizontal: 12,
-          marginBottom: 8,
-          paddingVertical: 50,
-          alignSelf: 'center',
-        },
-      }}
-    />
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      />
+    </View>
   );
 
   const renderListing = () => {
     if (
       loader ||
-      [STATE_STATUS.UNFETCHED, STATE_STATUS.FETCHING].includes(coins_status)
+      (pageNo == 1 &&
+        [STATE_STATUS.UNFETCHED, STATE_STATUS.FETCHING].includes(coins_status))
     ) {
       return renderLoader();
     } else {
