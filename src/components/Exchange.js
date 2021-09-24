@@ -27,7 +27,7 @@ const Exchange = props => {
           flexDirection: 'row',
           paddingHorizontal: 8,
           marginBottom: 10,
-          height:50
+          height: 50,
           // backgroundColor: '#fff',
         }}>
         {/* Coins */}
@@ -47,6 +47,7 @@ const Exchange = props => {
               marginLeft: 10,
               color: bkgStyle.darkModetxtColor,
               fontSize: 16,
+              fontFamily: 'OpenSans-Regular',
             }}>
             {props.item.name}
           </Text>

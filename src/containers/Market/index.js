@@ -181,7 +181,12 @@ const MarketScreen = props => {
       <View
         style={{...styles.screen, backgroundColor: bkgStyle.darkModebkgColor}}>
         <View style={styles.header}>
-          <Text style={{...styles.title, color: bkgStyle.darkModetitleColor}}>
+          <Text
+            style={{
+              ...styles.title,
+              fontFamily: 'Montserrat-SemiBold',
+              color: bkgStyle.darkModetitleColor,
+            }}>
             Market
           </Text>
         </View>
@@ -204,6 +209,7 @@ const MarketScreen = props => {
         }}>
         {selectedCoinData && (
           <NewChartComponent
+            cryptoId={selectedCoinData.id}
             currentPrice={selectedCoinData?.current_price}
             logoUrl={selectedCoinData?.image}
             name={selectedCoinData?.name}

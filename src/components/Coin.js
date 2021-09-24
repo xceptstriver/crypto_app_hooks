@@ -36,6 +36,7 @@ const Coin = props => {
               marginLeft: 10,
               color: bkgStyle.darkModetxtColor,
               fontSize: 16,
+              fontFamily: 'OpenSans-Regular',
             }}>
             {props.item.name}
           </Text>
@@ -78,7 +79,12 @@ const Coin = props => {
             alignItems: 'flex-end',
             justifyContent: 'center',
           }}>
-          <Text style={{color: '#fff', fontSize: 12}}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 14,
+              fontFamily: 'OpenSans-Regular',
+            }}>
             $
             {props.item.current_price &&
               props.item.current_price
@@ -91,6 +97,7 @@ const Coin = props => {
               flexDirection: 'row',
               justifyContent: 'flex-end',
               alignItems: 'center',
+              fontFamily: 'OpenSans-Regular',
             }}>
             {props.item.price_change_percentage_7d_in_currency != 0 && (
               <Image
@@ -106,7 +113,13 @@ const Coin = props => {
                 }}
               />
             )}
-            <Text style={{marginLeft: 5, color: props.priceColor, fontSize: 8}}>
+            <Text
+              style={{
+                marginLeft: 5,
+                color: props.priceColor,
+                fontSize: 12,
+                fontFamily: 'OpenSans-Regular',
+              }}>
               {props.item.price_change_percentage_7d_in_currency.toFixed(2)}%
             </Text>
           </View>

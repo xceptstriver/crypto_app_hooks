@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Keyboard,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
@@ -41,6 +42,15 @@ const tabBarIcon = (focused, color, route) => {
 const Routes = props => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+
+  // useEffect(() => {
+  //   Keyboard.addListener('keyboardDidShow', () => {
+  //     setIsKeyboardShown(true);
+  //   });
+  //   Keyboard.addListener('keyboardDidHide', () => {
+  //     setIsKeyboardShown(false);
+  //   });
+  // }, []);
 
   const TabNavigator = () => {
     return (

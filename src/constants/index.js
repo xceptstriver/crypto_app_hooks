@@ -23,12 +23,12 @@ export const BOTTOM_TAB_SCREENS = [
     inactiveIcon: 'podium-outline',
   },
 
-  {
-    name: 'Portfolio',
-    component: PortfolioScreen,
-    activeIcon: 'briefcase',
-    inactiveIcon: 'briefcase-outline',
-  },
+  // {
+  //   name: 'Portfolio',
+  //   component: PortfolioScreen,
+  //   activeIcon: 'briefcase',
+  //   inactiveIcon: 'briefcase-outline',
+  // },
 ];
 
 export const APP_STACK_SCREENS = [
@@ -45,10 +45,10 @@ export const APP_STACK_SCREENS = [
     component: ExchangeScreen,
   },
 
-  {
-    name: 'Portfolio',
-    component: PortfolioScreen,
-  },
+  // {
+  //   name: 'Portfolio',
+  //   component: PortfolioScreen,
+  // },
 ];
 
 //Theme -- coloring

@@ -63,7 +63,11 @@ const SearchScreen = props => {
             onChangeText={value => {
               setInputValue(value);
             }}
-            style={{...styles.textInput, color: bkgStyle.darkModesecTxtColor}}
+            style={{
+              ...styles.textInput,
+              color: bkgStyle.darkModesecTxtColor,
+              fontFamily: 'Montserrat-SemiBold',
+            }}
           />
         </View>
         <View style={styles.flatlistWrapper}>

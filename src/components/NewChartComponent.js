@@ -12,6 +12,9 @@ import {
 // import 'intl';
 // import 'intl/locale-data/jsonp/en';
 import {useSharedValue} from 'react-native-reanimated';
+import Icon from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const {width: SIZE} = Dimensions.get('window');
 
 const NewChartComponent = props => {
@@ -23,6 +26,8 @@ const NewChartComponent = props => {
       : 'red';
   const latestCurrentPrice = useSharedValue(props.currentPrice);
   const [chartReady, setChartReady] = useState(false);
+  const [portfolioState, setPortfolioState] = useState([]);
+  const [isPortfolioed, setIsPortfolioed] = React.useState(false);
 
   useEffect(() => {
     latestCurrentPrice.value = props.currentPrice;
@@ -50,6 +55,83 @@ const NewChartComponent = props => {
     return '';
   };
 
+  // useEffect(() => {
+  //   readPortfolioData();
+  // }, []);
+
+  // const handleAddPortfolio = cryptoId => {
+  //   setPortfolioState(state => {
+  //     return [...state, cryptoId];
+  //   });
+  // };
+
+  // const handleRemovePortfolio = cryptoId => {
+  //   setPortfolioState(state => state.filter(item => item !== cryptoId));
+  // };
+
+  // const handlePortfolio = () => {
+  //   let findFlag = false;
+
+  //   portfolioState &&
+  //     portfolioState.forEach(item => {
+  //       if (item == props.cryptoId) {
+  //         handleRemovePortfolio(props.cryptoId);
+  //         findFlag = true;
+  //         return;
+  //       }
+  //     });
+
+  //   if (!findFlag) {
+  //     handleAddPortfolio(props.cryptoId);
+  //   }
+  // };
+  // useEffect(() => {
+  //   setIcon();
+  //   savePortfolioData();
+  //   console.log('hehehehehe');
+  // }, [portfolioState]);
+
+  // const savePortfolioData = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify({
+  //       portfolioState: await portfolioState,
+  //     });
+  //     await AsyncStorage.setItem('@storage_Key', jsonValue);
+  //   } catch (e) {
+  //     // saving error
+  //     console.log('storing data doesnt work', e);
+  //   }
+  // };
+
+  // const readPortfolioData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem('@storage_Key');
+  //     const tasksObj =
+  //       jsonValue != null
+  //         ? JSON.parse(jsonValue)
+  //         : console.log('watchlist and favourites are empty');
+  //     await setPortfolioState(tasksObj.portfolioState);
+  //     console.log('bhk', tasksObj.portfolioState);
+  //     // setIcon();
+  //     // setTimeout(() => {
+
+  //     // }, 2000);
+  //   } catch (e) {
+  //     // error reading value
+  //     console.log('loading stored data doesnt work');
+  //   }
+  // };
+
+  // const setIcon = () => {
+  //   console.log('mcportfolio', portfolioState);
+  //   portfolioState &&
+  //     portfolioState.forEach(item => {
+  //       if (item == props.cryptoId) {
+  //         setIsPortfolioed(true);
+  //       }
+  //     });
+  // };
+
   return (
     <ChartPathProvider
       data={{
@@ -65,6 +147,16 @@ const NewChartComponent = props => {
                 {props.name} ({props.symbol.toUpperCase()})
               </Text>
             </View>
+            {/* <Icon
+              onPress={() => {
+                setIsPortfolioed(!isPortfolioed);
+                handlePortfolio();
+              }}
+              name={isPortfolioed ? 'briefcase' : 'briefcase-outline'}
+              style={{marginLeft: 150}}
+              size={28}
+              color={isPortfolioed ? bkgStyle.darkModesecBkgColor : '#999'}
+            /> */}
             <Text style={styles.subtitle}>7d</Text>
           </View>
           <View style={styles.lowerTitles}>
@@ -92,7 +184,11 @@ const NewChartComponent = props => {
                   }}
                 />
               )}
-              <Text style={[styles.title, {color: priceColor}]}>
+              <Text
+                style={[
+                  styles.title,
+                  {color: priceColor, fontFamily: 'OpenSans-Regular'},
+                ]}>
                 {props.priceChangePercentage7d.toFixed(2)}%
               </Text>
             </View>
@@ -133,6 +229,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     color: '#A9ABB1',
+    fontFamily: 'OpenSans-Regular',
   },
   lowerTitles: {
     flexDirection: 'row',
@@ -143,6 +240,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
+    fontFamily: 'OpenSans-Regular',
   },
   title: {
     fontSize: 18,
